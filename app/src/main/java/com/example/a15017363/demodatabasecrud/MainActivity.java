@@ -16,6 +16,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.R.attr.id;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnAdd, btnRetrieve, btnEdit;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String data = etContent.getText().toString();
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long row_affected = dbh.insertNote(data);
+                long row_affected = dbh.insertNote(new Note(id,data));
                 dbh.close();
 
                 if(row_affected != -1 ){

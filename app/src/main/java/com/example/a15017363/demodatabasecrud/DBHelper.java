@@ -15,13 +15,14 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "simplenotes.db";
+    private static final String DATABASE_NAME = "simplenote.db";
     private static final int DATABASE_VERSION = 2;
     private static final String TABLE_NOTE = "note";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NOTE_CONTENT = "note_content";
 
     public DBHelper(Context context) {
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -49,10 +50,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public long insertNote(String noteContent) {
+    public long insertNote(Note noteContent) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NOTE_CONTENT, noteContent);
+        values.put(COLUMN_NOTE_CONTENT, noteContent.getNoteContent());
         long result = db.insert(TABLE_NOTE, null, values);
         if (result == -1){
             Log.d("DBHelper", "Insert failed");
